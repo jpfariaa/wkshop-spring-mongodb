@@ -34,7 +34,18 @@ public class UserService {
 	public void delete(String id) {
 		findById(id); // realiza a busca e caso nao exista realiza a exceção
 		repo.deleteById(id);
-		
+	}
+	
+	public User update(User entity) {
+
+	     User newObj = repo.findById(entity.getId()).get();
+	     updateData(newObj, entity);
+	     return repo.save(newObj);
+	}
+	
+	public void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
 	}
 	
 	public User fromDTO(UserDTO objDTO) {
